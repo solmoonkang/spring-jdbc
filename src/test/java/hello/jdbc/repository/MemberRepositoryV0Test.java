@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -28,5 +29,10 @@ class MemberRepositoryV0Test {
         memberRepositoryV0.update(member.getMemberId(), 20000);
         Member updatedMember = memberRepositoryV0.findById(member.getMemberId());
         assertThat(updatedMember.getMoney()).isEqualTo(20000);
+
+        // DELETE
+        memberRepositoryV0.delete(member.getMemberId());
+        assertThatThrownBy(() -> memberRepositoryV0.findById(member.getMemberId()))
+                .isInstanceOf(NoSuchElementException.class);
     }
 }
