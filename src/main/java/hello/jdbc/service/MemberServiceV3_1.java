@@ -20,14 +20,14 @@ public class MemberServiceV3_1 {
     private final PlatformTransactionManager platformTransactionManager;
     private final MemberRepositoryV3 memberRepository;
 
-    public void accountTransfer(String fromId, String toId, int money) throws SQLException {
+    public void accountTransfer(String fromId, String toId, int money) {
         // 트랜잭션 시작
         TransactionStatus transactionStatus =
                 platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
             // 비즈니스 로직
-            bizLogic(fromId, toId, money);
+            businessLogic(fromId, toId, money);
             platformTransactionManager.commit(transactionStatus); // 성공시 커밋
         } catch (Exception e) {
             platformTransactionManager.rollback(transactionStatus); // 실패시 롤백
@@ -35,7 +35,7 @@ public class MemberServiceV3_1 {
         }
     }
 
-    private void bizLogic(String fromId, String toId, int money) throws SQLException {
+    private void businessLogic(String fromId, String toId, int money) throws SQLException {
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
 

@@ -23,19 +23,19 @@ public class MemberServiceV3_2 {
         this.memberRepository = memberRepository;
     }
 
-    public void accountTransfer(String fromId, String toId, int money) throws SQLException {
+    public void accountTransfer(String fromId, String toId, int money) {
         transactionTemplate.executeWithoutResult((status) -> {
 
             try {
                 // 비즈니스 로직
-                bizLogic(fromId, toId, money);
+                businessLogic(fromId, toId, money);
             } catch (SQLException e) {
                 throw new IllegalStateException(e);
             }
         });
     }
 
-    private void bizLogic(String fromId, String toId, int money) throws SQLException {
+    private void businessLogic(String fromId, String toId, int money) throws SQLException {
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
 
