@@ -1,7 +1,7 @@
 package hello.jdbc.repository;
 
 import hello.jdbc.domain.Member;
-import hello.jdbc.repository.ex.MyDBException;
+import hello.jdbc.repository.ex.MyDbException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.support.JdbcUtils;
@@ -41,7 +41,7 @@ public class MemberRepositoryV4_1 implements MemberRepository {
             preparedStatement.executeUpdate();
             return member;
         } catch (SQLException e) {
-            throw new MyDBException(e);
+            throw new MyDbException(e);
         } finally {
             close(connection, preparedStatement, null);
         }
@@ -71,7 +71,7 @@ public class MemberRepositoryV4_1 implements MemberRepository {
                 throw new NoSuchElementException("member not found memberId=" + memberId);
             }
         } catch (SQLException e) {
-            throw new MyDBException(e);
+            throw new MyDbException(e);
         } finally {
             close(connection, preparedStatement, resultSet);
         }
@@ -92,7 +92,7 @@ public class MemberRepositoryV4_1 implements MemberRepository {
             preparedStatement.setString(2, memberId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new MyDBException(e);
+            throw new MyDbException(e);
         } finally {
             close(connection, preparedStatement, null);
         }
@@ -112,7 +112,7 @@ public class MemberRepositoryV4_1 implements MemberRepository {
             preparedStatement.setString(1, memberId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new MyDBException(e);
+            throw new MyDbException(e);
         } finally {
             close(connection, preparedStatement, null);
         }
